@@ -15,7 +15,7 @@ def make_feature_fasta(genbank_path, outpath, feature_type):
                 feature_count += 1
     fasta_out = open(outpath, 'w')
     SeqIO.write(seqs_of_interest, fasta_out, "fasta")
-    print(str(feature_count) + " sequences printed to fasta.")
+    print(str(feature_count) + " sequences written to fasta.")
 
 if __name__ == '__main__':
     if len(sys.argv) == 4:
