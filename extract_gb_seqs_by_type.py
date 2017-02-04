@@ -11,7 +11,11 @@ def make_feature_fasta(genbank_path, outpath, feature_type):
         for feature in record.features:
             if feature.type == feature_type:
                 sequence_of_interest = feature.location.extract(record).seq
-                seqs_of_interest.append(SeqRecord(sequence_of_interest,id=feature.qualifiers['locus_tag'][0]))
+                if 'product' in feature.qualifiers:
+                    product = feature.qualifiers['product'][0]
+                else:
+                    product = ''
+                seqs_of_interest.append(SeqRecord(sequence_of_interest,id=feature.qualifiers['locus_tag'][0], description=product))
                 feature_count += 1
     fasta_out = open(outpath, 'w')
     SeqIO.write(seqs_of_interest, fasta_out, "fasta")
